@@ -1,0 +1,380 @@
+*
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body
+{
+    font-family: -apple-system,"segoe UI" , Arial , sans-serif ;
+    background: #0b0e1a;
+    color: #fff;
+}
+
+/*NAV*/
+
+nav
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 60px;
+}
+.brand
+{
+    font-size: 20px;
+    font-weight: 700;
+}
+.nav-links
+{
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    color: #cfd2de;
+    font-size: 14px;
+}
+.nav-actions
+{
+    display: flex;
+    gap: 12px;
+}
+.nav-actions button
+{
+    padding: 9px 18px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+.nav-actions button:first-child
+{
+    background: transparent;
+    border: 1.5px solid #3a3f55;
+    color: #fff;
+}
+.nav-actions button:first-child:hover
+{
+     background: linear-gradient(135deg, #6c5dd3, #8b7bf5);
+    color: #fff;
+    font-weight: 600;
+
+}
+.nav-actions button:last-child
+{
+    background: linear-gradient(135deg, #6c5dd3, #8b7bf5);
+    color: #fff;
+    font-weight: 600;
+}
+.nav-actions button:last-child:hover
+{
+    background: transparent;
+    color: #fff;
+    transition: 0.3s ease;
+}
+
+/*HERO*/
+
+.hero
+{
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 40px 60px 80px;
+}
+.hero-left
+{
+    max-width: 540px;
+}
+.badge
+{
+    display: inline-block;
+    background: rgba(180,93,21,0.15);
+    color: #a99bf5;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 7px 6px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+h1
+{
+    font-size: 42px;
+    line-height: 1.2;
+    margin-bottom: 18px;
+}
+.hero-left p
+{
+    color: #a7abc0;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+.hero-ctas
+{
+    display: flex;
+    gap: 14px;
+    margin-bottom: 34px;
+}
+.hero-ctas button
+{
+    padding: 13px 26px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+}
+.hero-ctas button:first-child
+{
+    background: transparent;
+    border: 1.5px solid #3a3f55;
+    color: #fff;
+}
+.hero-ctas button:first-child:hover
+{
+     background: linear-gradient(135deg, #6c5dd3, #8b7bf5);
+    color: #fff;
+    font-weight: 600;
+
+}
+.hero-ctas button:last-child
+{
+    background: linear-gradient(135deg, #6c5dd3, #8b7bf5);
+    color: #fff;
+    font-weight: 600;
+}
+.hero-ctas button:last-child:hover
+{
+    background: transparent;
+    color: #fff;
+    transition: 0.3s ease;
+}
+.trust-row
+{
+    list-style: none;
+    display: flex;
+    gap: 24px;
+    color: #cfd2de;
+    font-size: 13px;
+}
+
+
+/*DASHBOARD REVIEW*/
+
+.dashbord-preview
+{
+    display: flex;
+    background: #12152a;
+    border: 1px solid #262b45;
+    border-radius: 14px;
+    width: 500px;
+    overflow: hidden;
+    height: fit-content;
+}
+.mockup-sidebar
+{
+    width: 130px;
+    border-right: 1px solid #262b45;
+    padding: 16px 10px;
+}
+.mockup-sidebar ul
+{
+    list-style: none;
+}
+.mockup-sidebar li
+{
+    font-size: 12px;
+    color: #9095ab;
+    padding: 8px;
+    margin-bottom: 4px;
+    border-radius: 6px;
+}
+.mockup-main
+{
+    flex: 1;
+    padding: 16px;
+}
+.mockup-main h2
+{
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+.stat-cards
+{
+    list-style: none;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+.stat-cards li
+{
+    flex: 1;
+    background: #1a1e38;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 11px;
+    color: #cfd2de;
+}
+table
+{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+table td
+{
+    padding: 8px 0;
+    border-bottom: 1px solid #1e2238;
+    color: #cfd2de;
+}
+
+/*FEATURES*/
+
+.features
+{
+    background: #f6f6fb;
+    color: #12142a;
+    padding: 70px 60px;
+    text-align: center;
+}
+.eyebrow
+{
+    color: #6c5dd3;
+    font-weight: 700;
+    font-size: 12px;
+    display: block;
+    margin-bottom: 10px;
+}
+.features h2
+{
+    font-size: 28px;
+    margin-bottom: 40px;
+}
+.features-grid
+{
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.features-card
+{
+    width: 240px;
+    text-align: left;
+}
+.features-card h3
+{
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+.features-card p
+{
+    font-size: 13px;
+    color: #6b6f80;
+    line-height: 1.5;
+}
+
+/*FORMULAIRE AJOUTER UN JEU*/
+
+.add-game-form
+{
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 70px 24px;
+    color: #fff;
+}
+.add-game-form h2
+{
+   font-size: 22px;
+   margin-bottom: 20px;
+   text-align: center;
+}
+.add-game-form form
+{
+     display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.add-game-form input, .add-game-form select, .add-game-form textarea
+{
+    background: #12152a;
+    border: 1px  solid #262b45;
+    border-radius: 8px;
+    padding: 12px 14px; 
+    color: #fff;
+    font-size: 14px;
+}
+.add-game-form textarea
+{
+    min-height: 80px;
+    resize: vertical;
+}
+.add-game-form button
+{
+     background: linear-gradient(135deg, #6c5dd3, #8b7bf5);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    padding: 13px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.add-game-form button:hover
+{
+    background: #12152a;
+}
+
+@media (max-width: 900px)
+{
+    nav
+    {
+        flex-direction: column;
+        gap: 16px;
+        padding: 20px 24px;
+    }
+    .nav-links
+    {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+    }
+    .hero
+    {
+        flex-direction: column;
+        padding: 30px 24px 60px;
+    }
+    .hero-left
+    {
+        max-width: 100%;
+        text-align: center;
+    }
+    h1 
+    {
+        font-size: 30px;
+    }
+    .hero-ctas
+    {
+        justify-content: center;
+    }
+    .trust-row
+    {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .dashbord-preview
+    {
+        width: 100%;
+        max-width: 500px;
+    }
+    .features 
+    {
+        padding: 50px 24px;
+    }
+    .features-grid
+    {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+

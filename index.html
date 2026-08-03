@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game List Backlog de Jeux Video</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="brand">GameList</div>
+        <ul class="nav-links">
+            <li>Fonctionnalités</li>
+            <li>A propos</li>
+            <li>Comment sa marche</li>
+            <li>Contact</li>
+        </ul>
+        <div class="nav-actions">
+            <button>Se connecter</button>
+            <button>S'inscrire</button>
+        </div>
+    </nav>
+    <section class="hero">
+        <div class="hero-left">
+            <span class="badge">Ton univers, tes regles</span>
+             <h1>Gère ton backlog de jeux video</h1>
+            <p>Ajoute, organise et suis tous les jeux auxquels tu veux jouer.</p>
+           <div class="hero-ctas">
+                 <button>Commencer gratuitement</button>
+                 <button>Voir une démo</button>
+           </div>
+           <ul class="trust-row">
+                <li>100% pour les gamers</li>
+                <li>Accessible partout</li>
+                <li>Tes données t'appartiennent</li>
+           </ul>
+        </div>
+        <div class="dashbord-preview">
+            <nav class="mockup-sidebar">
+                <ul>
+                    <li>Acceuil</li>
+                    <li>Mes jeux</li>
+                    <li>Ajouter un jeux</li>
+                    <li>Statistiques</li>
+                    <li>Paramètres</li>
+                </ul>
+            </nav>
+            <div class="mockup-main">
+                <h2>Mes jeux</h2>
+                <ul class="stat-cards">
+                    <li>A jouer :24</li>
+                    <li>En cours :7</li>
+                    <li>Terminés :18</li>
+                    <li>Abandonnés :3</li>
+                </ul>
+                <table>
+                    <tr><td>The Witcher 3 : wild hunt</td><td>terminé</td><td>9.5/10</td></tr>
+                    <tr><td>Elding ring</td><td>A jouer</td><td>9/10</td></tr>
+                    <tr><td>God of war ragnarok</td><td>En cours</td><td>9/10</td></tr>
+                </table>
+            </div>
+        </div>
+    </section>
+    <section class="features">
+        <span class="eyebrow">Fonctionalités</span>
+        <h2>Tout ce qu'il te faut pour organiser ta passion </h2>
+        <div class="features-grid">
+            <div class="features-card">
+                <h3>Organise tes jeux</h3>
+                <p>Classe tes jeux par status, plateforme et personnalise-les selon tes envies.</p>
+            </div>
+            <div class="features-card">
+                <h3>Note et commente</h3>
+                <p>Donne une note a tes jeux et ecris tes impressions pour t'en souvenir.</p>
+            </div>
+            <div class="features-card">
+                <h3>Suis tes statistiques</h3>
+                <p>Visualise ta progression et decouvre tes habitudes de jeu.</p>
+            </div>
+            <div class="features-card">
+                <h3>Accesssible partout</h3>
+                <p>ton backlog est sy,chronisé et disponible sur tous tes appareils.</p>
+            </div>
+        </div>
+    </section>
+    <section class="add-game-form">
+        <h2>Ajouter un jeu</h2>
+        <form action="#">
+            <input type="text" placeholder="tiitre du jeux">
+            <input type="text" placeholder="plateforme(PC, PS5, SWITCH...)">
+            <select name="" id="">
+                <option>A jouer</option>
+                <option>En cours</option>
+                <option>terminé</option>
+                <option>Abandonnés</option>
+            </select>
+            <input type="number" placeholder="Note (0-10)" min="0" max="10">
+            <textarea placeholder="commentaire personnel"></textarea>
+            <button type="submit">Enregistrer</button>
+        </form>
+    </section>
+</body>
+</html>
