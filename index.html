@@ -53,10 +53,11 @@
                     <li>Terminés :18</li>
                     <li>Abandonnés :3</li>
                 </ul>
+                <button id="filtre-termine">Afficher seulement les jeux Terminés</button>
                 <table>
-                    <tr><td>The Witcher 3 : wild hunt</td><td>terminé</td><td>9.5/10</td></tr>
-                    <tr><td>Elding ring</td><td>A jouer</td><td>9/10</td></tr>
-                    <tr><td>God of war ragnarok</td><td>En cours</td><td>9/10</td></tr>
+                    <tr id="jeu1"><td>The Witcher 3 : wild hunt</td><td>terminé</td><td>9.5/10</td></tr>
+                    <tr id="jeu2"><td>Elding ring</td><td>A jouer</td><td>9/10</td></tr>
+                    <tr id="jeu3"><td>God of war ragnarok</td><td>En cours</td><td>9/10</td></tr>
                 </table>
             </div>
         </div>
@@ -85,19 +86,22 @@
     </section>
     <section class="add-game-form">
         <h2>Ajouter un jeu</h2>
-        <form action="#">
-            <input type="text" placeholder="tiitre du jeux">
+        <form action="#" id="add-game-form">
+            <input type="text" id="titre" placeholder="titre du jeux">
             <input type="text" placeholder="plateforme(PC, PS5, SWITCH...)">
-            <select name="" id="">
+            <select>
                 <option>A jouer</option>
                 <option>En cours</option>
                 <option>terminé</option>
                 <option>Abandonnés</option>
             </select>
-            <input type="number" placeholder="Note (0-10)" min="0" max="10">
+            <input type="number" placeholder="Note (0-10)" min="0" max="10" id="note">
             <textarea placeholder="commentaire personnel"></textarea>
             <button type="submit">Enregistrer</button>
+            <p id="erreur" style="color: #ff6b6b;display: none;"></p>
         </form>
     </section>
+    <script src="script.js"></script>
 </body>
+
 </html>
