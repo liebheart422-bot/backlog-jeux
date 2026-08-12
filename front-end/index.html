@@ -16,8 +16,8 @@
             <li>Contact</li>
         </ul>
         <div class="nav-actions">
-            <button>Se connecter</button>
-            <button>S'inscrire</button>
+            <button id="btn-ouvrir-connexion">Se connecter</button>
+            <button id="btn-ouvrir-inscription">S'inscrire</button>
         </div>
     </nav>
     <section class="hero">
@@ -54,10 +54,15 @@
                     <li>Abandonnés :3</li>
                 </ul>
                 <button id="filtre-termine">Afficher seulement les jeux Terminés</button>
-                <table>
-                    <tr id="jeu1"><td>The Witcher 3 : wild hunt</td><td>terminé</td><td>9.5/10</td></tr>
-                    <tr id="jeu2"><td>Elding ring</td><td>A jouer</td><td>9/10</td></tr>
-                    <tr id="jeu3"><td>God of war ragnarok</td><td>En cours</td><td>9/10</td></tr>
+
+                <input type="text" id="recherche-jeu" placeholder="rechercher un jeu...">
+                <select name="" id="tri-jeux">
+                    <option value="titre">Trier par titre</option>
+                    <option value="note">Trier par note</option>
+                </select>
+
+                <table id="table-jeux">
+                    
                 </table>
             </div>
         </div>
@@ -101,6 +106,31 @@
             <p id="erreur" style="color: #ff6b6b;display: none;"></p>
         </form>
     </section>
+
+    <section class="auth-form" id="section-connexion" style="display: none;">
+        <h2>connexion</h2>
+        <form action="" id="connexion-form">
+            <input type="email" id="connexion-email" placeholder="Email" required>
+            <input type="password" id="connexion-motDePasse" placeholder="mot De Passe" required>
+            <button type="submit">Se connecter</button>
+        </form>
+        <p id="connexion-erreur" style="color: #ff6b6b;display: none;"></p>
+    </section>
+
+
+
+
+    <section class="auth-form" id="section-inscription" style="display: none;">
+        <h2>inscription</h2>
+        <form action="" id="inscriptionion-form">
+            <input type="email" id="inscription-email" placeholder="Email" required>
+            <input type="password" id="inscription-motDePasse" placeholder="mot De Passe" required>
+            <button type="submit">S'inscrire</button>
+        </form>
+        <p id="inscription-erreur" style="color: #ff6b6b;display: none;"></p>
+    </section>
+    
+
     <script src="script.js"></script>
 </body>
 
