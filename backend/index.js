@@ -179,3 +179,6 @@ app.use((erreur, req, res, next) => {
 app.listen(3000, () => {
     console.log("serveur démarré sur  http://localhost:3000 ");
 });
+
+
+module.exports = app;

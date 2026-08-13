@@ -28,6 +28,8 @@ form.addEventListener("submit",async (event) => {
         },
         body: JSON.stringify({
             titre:  titre,
+            plateforme: document.getElementById("plateforme")?.value || document.querySelectorAll('.add-game-form input [placeholder*="plateforme"] ').value,
+            statut: document.querySelectorAll(".add-game-form select").value,
             note: note
         })
     });
@@ -170,6 +172,10 @@ formConnexion.addEventListener("submit", async (event) => {
     localStorage.setItem("token",donnees.token);
     connexionErreur.style.display = "none";
 
+    
+    formConnexion.reset();
+    sectionConnexion.style.display = "none";
+
     alert("connecté avec succès !");
     chargerJeux();
 
@@ -207,6 +213,7 @@ formInscription.addEventListener("submit", async (event) => {
         connexionErreur.style.display = "block";
         return;
     }
+    formInscription.reset();
     alert ("compte créé ! Tu peux maintenant te connecter.");
     sectionInscription.style.display = "none";
   
