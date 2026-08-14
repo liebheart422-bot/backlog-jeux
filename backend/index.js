@@ -175,9 +175,10 @@ app.use((erreur, req, res, next) => {
     res.status(500).json({ message: "une erreur inattendue esu survenue"});
 });
 
+const PORT = process.env.PORT || 3000;
 
-app.listen(3000, () => {
-    console.log("serveur démarré sur  http://localhost:3000 ");
+app.listen(PORT, () => {
+    console.log(`serveur démarré sur  le port ${PORT}` );
 });
 
 
