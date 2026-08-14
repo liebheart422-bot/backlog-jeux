@@ -69,7 +69,7 @@ async function chargerBlague() {
 }
 chargerBlague();
 
-const API_URL = "http://localhost:3000";
+const API_URL = "https://backlog-jeux.onrender.com/jeux";
 
 async function chargerJeux() {
     const token = localStorage.getItem("token");
