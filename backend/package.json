@@ -7,7 +7,6 @@
     "dev": "nodemon index.js",
     "start": "node index.js",
     "test": "jest"
-    
   },
   "keywords": [],
   "author": "",
@@ -19,7 +18,8 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-validator": "^7.3.2",
-    "jsonwebtoken": "^9.0.3"
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.9.2"
   },
   "devDependencies": {
     "jest": "^30.4.2",
