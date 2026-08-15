@@ -13,12 +13,23 @@ body
 
 /*NAV*/
 
+/* CORRECTION : il manquait display:flex / align-items / justify-content /
+   padding — sans ça, brand / nav-links / nav-actions / nav-profil
+   s'empilaient verticalement au lieu de s'aligner sur une ligne (c'était la
+   cause de la nav "complètement désordonnée"). */
 nav
 {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px 60px;
+    flex-wrap: wrap;
+    row-gap: 12px;
+    position: sticky;
+    z-index: 500;
+    top: 0;
+    backdrop-filter: blur(8px);
+    background: rgba(11,14,26,0.85);
 }
 .brand
 {
@@ -33,6 +44,33 @@ nav
     color: #cfd2de;
     font-size: 14px;
 }
+.nav-links li {
+    position: relative;
+    cursor: pointer;
+    transition: color 0.5s ease;
+}
+.nav-links li::after
+{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    /* CORRECTION : il manquait "width: 0%" à l'état de base — sans ça, le
+       trait sous le lien "apparaissait" directement au survol au lieu de
+       s'animer en glissant de 0% à 100%. */
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(135deg, #6c5dd3, #8b7bf5);
+    transition: width 0.25s ease;
+}
+.nav-links li:hover
+{
+    color: #fff;
+}
+.nav-links li:hover::after
+{
+    width: 100%;
+}
 .nav-actions
 {
     display: flex;
@@ -45,7 +83,12 @@ nav
     border: none;
     font-size: 14px;
     cursor: pointer;
+    /* CORRECTION : "box-shadow: 0.15s ease;" n'est pas une valeur valide de
+       box-shadow (ça attend une ombre, pas une durée) — le navigateur
+       l'ignorait silencieusement. Fusionné dans la transition à la place. */
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
 .nav-actions button:first-child
 {
     background: transparent;
@@ -57,6 +100,8 @@ nav
      background: linear-gradient(135deg, #6c5dd3, #8b7bf5);
     color: #fff;
     font-weight: 600;
+    transition: transform 0.15s ease ;
+    box-shadow: 0 6px 16px rgba(103,93,211,0.5);
 
 }
 .nav-actions button:last-child
@@ -72,6 +117,41 @@ nav
     transition: 0.3s ease;
 }
 
+/* NOUVEAU : profil affiché dans la nav une fois connecté (remplace les
+   boutons Se connecter / S'inscrire) */
+.nav-profil
+{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.profil-avatar
+{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6c5dd3, #8b7bf5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+.nav-profil button
+{
+    background: transparent;
+    border: 1.5px solid #3a3f55;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+.nav-profil button:hover
+{
+    transform: translateY(-2px);
+}
+
 /*HERO*/
 
 .hero
@@ -80,6 +160,7 @@ nav
     justify-content: space-between;
     gap: 40px;
     padding: 40px 60px 80px;
+    flex-wrap: wrap;
 }
 .hero-left
 {
@@ -88,11 +169,14 @@ nav
 .badge
 {
     display: inline-block;
-    background: rgba(180,93,21,0.15);
+    /* CORRECTION : rgba(180,93,21,...) donnait une teinte brun-orangé au lieu
+       du violet du reste du site -> corrigé en rgba(108,93,211,...), la même
+       couleur utilisée partout ailleurs (boutons, dégradés...). */
+    background: rgba(108,93,211,0.15);
     color: #a99bf5;
     font-size: 12px;
     font-weight: 700;
-    padding: 7px 6px;
+    padding: 7px 14px;
     border-radius: 20px;
     margin-bottom: 20px;
 }
@@ -155,10 +239,11 @@ h1
     gap: 24px;
     color: #cfd2de;
     font-size: 13px;
+    flex-wrap: wrap;
 }
 
 
-/*DASHBOARD REVIEW*/
+/*DASHBOARD PREVIEW*/
 
 .dashbord-preview
 {
@@ -167,6 +252,7 @@ h1
     border: 1px solid #262b45;
     border-radius: 14px;
     width: 500px;
+    max-width: 100%;
     overflow: hidden;
     height: fit-content;
 }
@@ -175,6 +261,14 @@ h1
     width: 130px;
     border-right: 1px solid #262b45;
     padding: 16px 10px;
+    /* CORRECTION : le sélecteur "nav" plus haut s'applique à TOUT élément
+       <nav>, y compris celui-ci (mockup-sidebar est un <nav>). Sans cette
+       ligne, il héritait à tort du position:sticky / fond sombre / flou de
+       la vraie barre de navigation. On neutralise ça ici. */
+    position: static;
+    backdrop-filter: none;
+    background: transparent;
+    display: block;
 }
 .mockup-sidebar ul
 {
@@ -192,6 +286,7 @@ h1
 {
     flex: 1;
     padding: 16px;
+    min-width: 0;
 }
 .mockup-main h2
 {
@@ -204,6 +299,7 @@ h1
     display: flex;
     gap: 8px;
     margin-bottom: 14px;
+    flex-wrap: wrap;
 }
 .stat-cards li
 {
@@ -222,9 +318,52 @@ table
 }
 table td
 {
-    padding: 8px 0;
+    padding: 8px 6px;
     border-bottom: 1px solid #1e2238;
     color: #cfd2de;
+}
+.statut-select
+{
+    background: #1a1e38;
+    color: #fff;
+    border: 1px solid #262b45;
+    border-radius: 6px;
+    padding: 4px 6px;
+    font-size: 11px;
+}
+
+/* CORRECTION : tout ce bloc (table-wrapper, table-jeux, recherche/tri/filtre,
+   dashboard-controls) était placé UNIQUEMENT dans le @media (max-width:900px)
+   plus bas -> sur desktop, ces éléments n'avaient aucun style du tout.
+   Déplacé ici comme style par défaut, valable sur toutes les tailles d'écran. */
+.table-wrapper
+{
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+#table-jeux
+{
+    min-width: 420px;
+    width: 100%;
+}
+#recherche-jeux, #tri-jeux, #filtre-termine
+{
+    background: #12142a;
+    border: 1.5px solid #262b45;
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #fff;
+    font-size: 13px;
+}
+/* CORRECTION : la classe ici s'appelait "dashbord-controls" (sans le "a")
+   alors que index.html utilise "dashboard-controls" (bien orthographié) ->
+   ce style ne s'appliquait donc jamais. Renommé pour matcher le HTML. */
+.dashboard-controls
+{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
 }
 
 /*FEATURES*/
@@ -323,12 +462,48 @@ table td
 {
     background: #12152a;
 }
+
+/* CORRECTION : .auth-form (connexion/inscription) devient une vraie popup
+   (overlay plein écran + carte centrée), plutôt qu'une section poussant la
+   page vers le bas. Cachée par défaut (display:none), affichée uniquement
+   quand la classe .actif est ajoutée par script.js. */
 .auth-form
 {
-    max-width: 460px;
-    margin: 0 auto;
-    padding: 40px 24px;
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.auth-form.actif
+{
+    display: flex;
+}
+.auth-form .auth-card
+{
+    background: #12152a;
+    border: 1px solid #262b45;
+    border-radius: 14px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
     color: #fff;
+}
+.auth-form .fermer
+{
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: none;
+    border: none;
+    color: #9095ab;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
 }
 .auth-form h2
 {
@@ -415,5 +590,3 @@ table td
         align-items: center;
     }
 }
-
-

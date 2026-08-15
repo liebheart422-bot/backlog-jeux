@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,11 +15,20 @@
             <li>Comment sa marche</li>
             <li>Contact</li>
         </ul>
-        <div class="nav-actions">
+
+        <!-- CORRECTION : nav-actions a maintenant un id, + un bloc "profil"
+             caché par défaut. script.js bascule entre les deux selon qu'un
+             token existe (mettreAJourEtatConnexion()). -->
+        <div class="nav-actions" id="nav-auth-boutons">
             <button id="btn-ouvrir-connexion">Se connecter</button>
             <button id="btn-ouvrir-inscription">S'inscrire</button>
         </div>
+        <div class="nav-profil" id="nav-profil" style="display:none;">
+            <div class="profil-avatar">👤</div>
+            <button id="btn-deconnexion">Déconnexion</button>
+        </div>
     </nav>
+
     <section class="hero">
         <div class="hero-left">
             <span class="badge">Ton univers, tes regles</span>
@@ -47,26 +56,37 @@
             </nav>
             <div class="mockup-main">
                 <h2>Mes jeux</h2>
+
+                <!-- CORRECTION : chaque chiffre a maintenant un id, pour que
+                     script.js puisse les mettre à jour après chargement des
+                     jeux (avant : codés en dur, ne bougeaient jamais). -->
                 <ul class="stat-cards">
-                    <li>A jouer :24</li>
-                    <li>En cours :7</li>
-                    <li>Terminés :18</li>
-                    <li>Abandonnés :3</li>
+                    <li>A jouer : <span id="stat-a-jouer">0</span></li>
+                    <li>En cours : <span id="stat-en-cours">0</span></li>
+                    <li>Terminés : <span id="stat-termine">0</span></li>
+                    <li>Abandonnés : <span id="stat-abandonne">0</span></li>
                 </ul>
-                <button id="filtre-termine">Afficher seulement les jeux Terminés</button>
 
-                <input type="text" id="recherche-jeu" placeholder="rechercher un jeu...">
-                <select name="" id="tri-jeux">
-                    <option value="titre">Trier par titre</option>
-                    <option value="note">Trier par note</option>
-                </select>
+                <div class="dashboard-controls">
+                    <button id="filtre-termine">Afficher seulement les jeux Terminés</button>
 
-                <table id="table-jeux">
-                    
-                </table>
+                    <!-- CORRECTION : id="recherche-jeu" -> "recherche-jeux"
+                         pour matcher exactement ce que script.js cherche -->
+                    <input type="text" id="recherche-jeux" placeholder="rechercher un jeu...">
+                    <select id="tri-jeux">
+                        <option value="titre">Trier par titre</option>
+                        <option value="note">Trier par note</option>
+                    </select>
+                </div>
+                <div class="table-wrapper">
+                    <table id="table-jeux">
+
+                    </table>
+                </div>
             </div>
         </div>
     </section>
+
     <section class="features">
         <span class="eyebrow">Fonctionalités</span>
         <h2>Tout ce qu'il te faut pour organiser ta passion </h2>
@@ -89,16 +109,22 @@
             </div>
         </div>
     </section>
+
     <section class="add-game-form">
         <h2>Ajouter un jeu</h2>
         <form action="#" id="add-game-form">
             <input type="text" id="titre" placeholder="titre du jeux">
             <input type="text" id="plateforme"  placeholder="plateforme(PC, PS5, SWITCH...)">
-            <select>
-                <option>A jouer</option>
-                <option>En cours</option>
-                <option>terminé</option>
-                <option>Abandonnés</option>
+
+            <!-- CORRECTION : ce <select> n'avait aucun id, donc script.js ne
+                 pouvait pas lire sa valeur correctement (statut "undefined").
+                 Les value= sont en minuscules pour matcher exactement ce que
+                 le tableau dynamique (script.js) et le filtre utilisent déjà. -->
+            <select id="statut">
+                <option value="a jouer">A jouer</option>
+                <option value="en cours">En cours</option>
+                <option value="terminé">Terminé</option>
+                <option value="abandonné">Abandonné</option>
             </select>
             <input type="number" placeholder="Note (0-10)" min="0" max="10" id="note">
             <textarea placeholder="commentaire personnel"></textarea>
@@ -107,31 +133,42 @@
         </form>
     </section>
 
-    <section class="auth-form" id="section-connexion" style="display: none;">
-        <h2>connexion</h2>
-        <form action="" id="connexion-form">
-            <input type="email" id="connexion-email" placeholder="Email" required>
-            <input type="password" id="connexion-motDePasse" placeholder="mot De Passe" required>
-            <button type="submit">Se connecter</button>
-        </form>
-        <p id="connexion-erreur" style="color: #ff6b6b;display: none;"></p>
+    <!-- CORRECTION : les 2 sections ci-dessous sont maintenant structurées
+         comme une vraie popup (overlay + carte centrée + bouton fermer),
+         pilotée par la classe .actif ajoutée/retirée en JS. Le style de base
+         (display:none, position fixed...) est dans style.css. -->
+
+    <section class="auth-form" id="section-connexion">
+        <div class="auth-card">
+            <button type="button" class="fermer" aria-label="Fermer">&times;</button>
+            <h2>Connexion</h2>
+            <form action="" id="connexion-form">
+                <input type="email" id="connexion-email" placeholder="Email" required>
+                <input type="password" id="connexion-motDePasse" placeholder="mot De Passe" required>
+                <button type="submit">Se connecter</button>
+            </form>
+            <p id="connexion-erreur" style="color: #ff6b6b;display: none;"></p>
+        </div>
     </section>
 
-
-
-
-    <section class="auth-form" id="section-inscription" style="display: none;">
-        <h2>inscription</h2>
-        <form action="" id="inscriptionion-form">
-            <input type="email" id="inscription-email" placeholder="Email" required>
-            <input type="password" id="inscription-motDePasse" placeholder="mot De Passe" required>
-            <button type="submit">S'inscrire</button>
-        </form>
-        <p id="inscription-erreur" style="color: #ff6b6b;display: none;"></p>
+    <section class="auth-form" id="section-inscription">
+        <div class="auth-card">
+            <button type="button" class="fermer" aria-label="Fermer">&times;</button>
+            <h2>Inscription</h2>
+            <!-- CORRECTION : id="inscriptionion-form" -> "inscription-form".
+                 Cette faute de frappe faisait planter TOUT script.js à cet
+                 endroit (formInscription valait null), donc rien après cette
+                 ligne dans le fichier ne s'exécutait jamais. C'était la cause
+                 principale de "rien ne change". -->
+            <form action="" id="inscription-form">
+                <input type="email" id="inscription-email" placeholder="Email" required>
+                <input type="password" id="inscription-motDePasse" placeholder="mot De Passe" required>
+                <button type="submit">S'inscrire</button>
+            </form>
+            <p id="inscription-erreur" style="color: #ff6b6b;display: none;"></p>
+        </div>
     </section>
-    
 
     <script src="script.js"></script>
 </body>
-
 </html>
