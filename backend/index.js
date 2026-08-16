@@ -170,7 +170,11 @@ const Utilisateur = mongoose.model("utilisateur", utilisateurSchema);
     try {
         const { email, motDePasse } = req.body;
         const utilisateur = await Utilisateur.findOne({email: email});
-        if(!utilisateur) {
+        // CORRECTION : si l'utilisateur n'existe pas OU si son mot de passe
+        // stocké est manquant/invalide (compte créé pendant un ancien bug),
+        // bcrypt.compare() plantait avec une erreur 500 au lieu de répondre
+        // proprement "mot de passe incorrect". On vérifie les deux cas ici.
+        if(!utilisateur || !utilisateur.motDePasse) {
             return res.status(401).json({ message: "Email ou mot de passe incorrect"});
         }
         const motDePasseValide = await bcrypt.compare(motDePasse, utilisateur.motDePasse);
