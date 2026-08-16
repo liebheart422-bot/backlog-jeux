@@ -44,6 +44,26 @@ function ouvrirModal(section) { section.classList.add("actif"); }
 function fermerModal(section) { section.classList.remove("actif"); }
 
 // ============================================
+// INDICATEUR DE CHARGEMENT SUR LES BOUTONS
+// ============================================
+
+// NOUVEAU : le service Render gratuit s'endort après inactivité et peut
+// mettre jusqu'à 50-60 secondes à répondre à la première requête après une
+// pause. Sans indicateur, le bouton a juste l'air mort pendant ce temps —
+// c'est exactement ce qui a fait croire à tes amis que le site ne marchait
+// pas, alors que le serveur finissait par répondre.
+function demarrerChargement(bouton, texteChargement) {
+    bouton.dataset.texteOriginal = bouton.textContent;
+    bouton.textContent = texteChargement;
+    bouton.disabled = true;
+}
+
+function arreterChargement(bouton) {
+    bouton.textContent = bouton.dataset.texteOriginal || bouton.textContent;
+    bouton.disabled = false;
+}
+
+// ============================================
 // FORMULAIRE "AJOUTER UN JEU"
 // ============================================
 
@@ -68,6 +88,12 @@ form.addEventListener("submit", async (event) => {
     }
 
     const token = localStorage.getItem("token");
+    const boutonEnregistrer = form.querySelector('button[type="submit"]');
+
+    // NOUVEAU : le bouton affiche "Enregistrement..." et se désactive
+    // pendant l'envoi, pour qu'on sache que quelque chose se passe même si
+    // le serveur met du temps à répondre (cold start Render).
+    demarrerChargement(boutonEnregistrer, "Enregistrement...");
 
     // CORRECTION : ajout d'un try/catch — vu ta connexion instable, si le
     // réseau coupe pendant l'envoi, on affiche un message clair au lieu que
@@ -107,6 +133,8 @@ form.addEventListener("submit", async (event) => {
     } catch (erreurReseau) {
         erreur.textContent = "Impossible de contacter le serveur. Vérifie ta connexion.";
         erreur.style.display = "block";
+    } finally {
+        arreterChargement(boutonEnregistrer);
     }
     // CORRECTION : l'ancien alert("jeu ajouté") était placé hors du if/else,
     // donc il s'affichait même en cas d'échec. Supprimé — chargerJeux() qui
@@ -269,6 +297,10 @@ formConnexion.addEventListener("submit", async (event) => {
     event.preventDefault();
     const email = document.getElementById("connexion-email").value;
     const motDePasse = document.getElementById("connexion-motDePasse").value;
+    const boutonConnexion = formConnexion.querySelector('button[type="submit"]');
+
+    // NOUVEAU : "Connexion..." + bouton désactivé pendant l'attente
+    demarrerChargement(boutonConnexion, "Connexion...");
 
     try {
         const reponse = await fetch(`${API_URL}/connexion`, {
@@ -295,6 +327,8 @@ formConnexion.addEventListener("submit", async (event) => {
     } catch (erreurReseau) {
         connexionErreur.textContent = "Impossible de contacter le serveur. Vérifie ta connexion.";
         connexionErreur.style.display = "block";
+    } finally {
+        arreterChargement(boutonConnexion);
     }
 });
 
@@ -333,6 +367,10 @@ formInscription.addEventListener("submit", async (event) => {
     event.preventDefault();
     const email = document.getElementById("inscription-email").value;
     const motDePasse = document.getElementById("inscription-motDePasse").value;
+    const boutonInscription = formInscription.querySelector('button[type="submit"]');
+
+    // NOUVEAU : "Inscription..." + bouton désactivé pendant l'attente
+    demarrerChargement(boutonInscription, "Inscription...");
 
     try {
         // CORRECTION : appelait "/connexion" au lieu de "/inscription"
@@ -361,5 +399,7 @@ formInscription.addEventListener("submit", async (event) => {
     } catch (erreurReseau) {
         inscriptionErreur.textContent = "Impossible de contacter le serveur. Vérifie ta connexion.";
         inscriptionErreur.style.display = "block";
+    } finally {
+        arreterChargement(boutonInscription);
     }
 });
