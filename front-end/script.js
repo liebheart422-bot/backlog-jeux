@@ -36,6 +36,23 @@ document.getElementById("btn-deconnexion")?.addEventListener("click", () => {
     document.getElementById("table-jeux").innerHTML = "";
 });
 
+// NOUVEAU : clic sur l'avatar = ouvre/ferme le petit menu (juste
+// "Déconnexion" pour l'instant). Un clic n'importe où ailleurs sur la page
+// referme le menu, comme sur la plupart des sites.
+const boutonToggleProfil = document.getElementById("btn-toggle-profil");
+const profilDropdown = document.getElementById("profil-dropdown");
+
+boutonToggleProfil?.addEventListener("click", (event) => {
+    event.stopPropagation(); // évite que le clic déclenche aussi la fermeture ci-dessous
+    profilDropdown.classList.toggle("ouvert");
+});
+
+document.addEventListener("click", (event) => {
+    if (profilDropdown && !profilDropdown.contains(event.target) && event.target !== boutonToggleProfil) {
+        profilDropdown.classList.remove("ouvert");
+    }
+});
+
 // ============================================
 // POPUP CONNEXION / INSCRIPTION (ouvrir / fermer)
 // ============================================

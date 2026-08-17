@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav>
-        <div class="brand">GameList</div>
+        <div class="brand">🎮GameList🎮</div>
         <ul class="nav-links">
             <li>Fonctionnalités</li>
             <li>A propos</li>
@@ -24,8 +24,10 @@
             <button id="btn-ouvrir-inscription">S'inscrire</button>
         </div>
         <div class="nav-profil" id="nav-profil" style="display:none;">
-            <div class="profil-avatar">👤</div>
-            <button id="btn-deconnexion">Déconnexion</button>
+            <button type="button" class="profil-avatar" id="btn-toggle-profil" aria-label="Mon profil">👤</button>
+            <div class="profil-dropdown" id="profil-dropdown">
+                <button type="button" id="btn-deconnexion">Déconnexion</button>
+            </div>
         </div>
     </nav>
 
