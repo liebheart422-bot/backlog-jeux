@@ -159,7 +159,17 @@ const Utilisateur = mongoose.model("utilisateur", utilisateurSchema);
             motDePasse: motDePasseHashe
         });
         await nouvelUtilisateur.save();
-        res.status(201).json({message: "compte créé avec succès"});
+
+        // NOUVEAU : on génère et renvoie un token directement après
+        // l'inscription, exactement comme le fait /connexion — plus besoin
+        // de se reconnecter manuellement juste après avoir créé son compte.
+        const token = jwt.sign(
+            { id: nouvelUtilisateur._id },
+            process.env.JWT_SECRET,
+            { expiresIn: "7d" }
+        );
+
+        res.status(201).json({ message: "compte créé avec succès", token: token });
     }catch(erreur) {
         res.status(500).json({message: "erreur lors de l'inscription"});
     }

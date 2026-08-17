@@ -391,10 +391,15 @@ formInscription.addEventListener("submit", async (event) => {
             return;
         }
 
+        // NOUVEAU : le serveur renvoie maintenant un token dès l'inscription
+        // -> on connecte directement la personne, sans lui faire retaper ses
+        // identifiants dans un 2e formulaire juste après.
+        localStorage.setItem("token", donnees.token);
         inscriptionErreur.style.display = "none";
         formInscription.reset();
         fermerModal(sectionInscription);
-        alert("Compte créé ! Tu peux maintenant te connecter.");
+        mettreAJourEtatConnexion(); // bascule direct sur le profil
+        chargerJeux();
 
     } catch (erreurReseau) {
         inscriptionErreur.textContent = "Impossible de contacter le serveur. Vérifie ta connexion.";
